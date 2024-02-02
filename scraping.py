@@ -14,30 +14,49 @@ dados_list = []
 
 for ativo in data['TICKER']:
     url1 = "https://www.fundamentus.com.br/detalhes.php?papel=" + ativo
-    url2 = "https://www.fundamentus.com.br/resultados_trimestrais.php?papel=" + ativo + "&tipo=1"
+#    url2 = "https://www.fundamentus.com.br/resultados_trimestrais.php?papel=" + ativo + "&tipo=1"
 
     driver.get(url1)
-    
+
     try:
         segmento = driver.find_elements(By.TAG_NAME, 'a')[30].text
         subsegmento = driver.find_elements(By.TAG_NAME, 'a')[31].text
-        dy = driver.find_elements(By.TAG_NAME, 'a')
-        
-        print(dy)
-        
-        # Pegar o link do último relatório divulgado pela empresa        
-        driver.get(url2)
-        elemento_link = driver.find_element(By.XPATH, "//a[contains(@href, 'https://www.rad.cvm.gov.br/ENET/frmDownloadDocumento')]")
-        href_do_link = elemento_link.get_attribute('href')
-        
+        valorMercado = driver.find_elements(By.CLASS_NAME, 'txt')[21].text
+        ultimoBalanco = driver.find_elements(By.CLASS_NAME, 'txt')[23].text
+        nroAcoes = driver.find_elements(By.CLASS_NAME, 'txt')[27].text
+        varMes = driver.find_elements(By.TAG_NAME, "font")[1].text
+        var12Meses = driver.find_elements(By.TAG_NAME, "font")[2].text
+        var2024 = driver.find_elements(By.TAG_NAME, "font")[4].text
+        var2023 = driver.find_elements(By.TAG_NAME, "font")[5].text
+        var2022 = driver.find_elements(By.TAG_NAME, "font")[6].text
+        var2021 = driver.find_elements(By.TAG_NAME, "font")[7].text
+        var2020 = driver.find_elements(By.TAG_NAME, "font")[8].text
+        var2019 = driver.find_elements(By.TAG_NAME, "font")[9].text
+
+        # Pegar o link do último relatório divulgado pela empresa
+#        driver.get(url2)
+#        elemento_link = driver.find_element(By.XPATH, "//a[contains(@href, 'https://www.rad.cvm.gov.br')]")
+#        href_do_link = elemento_link.get_attribute('href')
+
         # Adicionar os dados lidos ao dicionário
         dados = {
-            "ativo": ativo, 
-            "segmento": segmento, 
-            "sub-segmento": subsegmento, 
-            "link_release": href_do_link
+            "ativo": ativo,
+            "segmento": segmento,
+            "sub_segmento": subsegmento,
+            "valor_mercado": valorMercado,
+            "ultimo_balanco": ultimoBalanco,
+            "nro_acoes": nroAcoes,
+            "varMes": varMes,
+            "var12Mes": var12Meses,
+            "var2024": var2024,
+            "var2023": var2023,
+            "var2022": var2022,
+            "var2021": var2021,
+            "var2020": var2020,
+            "var2019": var2019,
+#            "link_release": href_do_link
         }
-        
+
         dados_list.append(dados)
         print(dados)
 
