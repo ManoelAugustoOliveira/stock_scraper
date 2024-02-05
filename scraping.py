@@ -32,6 +32,12 @@ for ativo in data['TICKER']:
         var2021 = driver.find_elements(By.TAG_NAME, "font")[7].text
         var2020 = driver.find_elements(By.TAG_NAME, "font")[8].text
         var2019 = driver.find_elements(By.TAG_NAME, "font")[9].text
+        pl = driver.find_elements(By.CLASS_NAME, "txt")[32].text
+        lpa = driver.find_elements(By.CLASS_NAME, "txt")[34].text
+        pvp = driver.find_elements(By.CLASS_NAME, "txt")[37].text
+        vpa = driver.find_elements(By.CLASS_NAME, "txt")[39].text
+        pebit = driver.find_elements(By.CLASS_NAME, "txt")[42].text
+        margemBruta = driver.find_elements(By.CLASS_NAME, "txt")[44].text
 
         # Pegar o link do último relatório divulgado pela empresa
 #        driver.get(url2)
@@ -54,7 +60,12 @@ for ativo in data['TICKER']:
             "var2021": var2021,
             "var2020": var2020,
             "var2019": var2019,
-#            "link_release": href_do_link
+            "P/L": pl,
+            "LPA": lpa,
+            "P/VP": pvp,
+            "VPA": vpa,
+            "P/EBIT": pebit,
+            "Marg. Bruta": margemBruta,
         }
 
         dados_list.append(dados)
